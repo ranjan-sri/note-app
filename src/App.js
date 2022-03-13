@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
 
-function App() {
+import './App.css';
+import AddNote from './components/add-note.component.jsx';
+import NoteList from './components/note-list.componenent';
+import Nav  from './components/nav-component';
+import EditNote from './components/edit-note.component'
+function App( {noteToEdit} ) {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-div'>
+      {
+      noteToEdit 
+      ?
+      <>
+        <EditNote />
+      </>
+      :
+      <>
+        <AddNote />
+        <Nav/>
+        <NoteList />
+      </>
+     }
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { noteToEdit: state.noteToEdit }
+}
+
+export default connect(mapStateToProps)(App);

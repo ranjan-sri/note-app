@@ -1,38 +1,132 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+* {
+    box-sizing: border-box;
   }
+  body {
+    font-family: 'Roboto', sans-serif;
+
+    min-height: 100vh;
+    background: linear-gradient(#7c7979, #ceced1);
+  }
+
+
+.nav {
+    padding: 20px 10px;
+    color: white;
+    background: grey;
+    display: flex;
+    justify-content: center;
+    text-decoration:solid;
+    font-size: 20px;
+    width: 95%;
+    margin: 10px auto;
+    border-radius: 10px;
+  }
+
+.add-note-div {
+    width: clamp(400px,400px,500px);
+    height: 152px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    /* justify-content: center; */
+    margin: 0 auto;
+  }
+ 
+
+.add-note-div textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    margin: 0 auto;
+
+  }
+
+  .add-note-div textarea:hover {
+    box-shadow: 2px 2px 10px;
+  }
+  
+ 
+  .add-btn {
+    margin-left: 5px;
+    float: right;
+    height: auto;
+  }
+  .note-div {
+    min-width: 400px;
+    align-items: center;
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px;
+
+  }
+
+  .note-div textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+  }
+ 
+  .btn-div {
+    float: right;
+  }
+
+ 
+.delete-btn {
+  margin-left: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.edit-btn {
+  margin-left: 5px;
+ 
+}
+
+
+  
+
+.note-list-div {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+.note-list-div h2 {
+  color:rgb(133, 77, 77);
+  display: block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.edit-div {
+  width: clamp(400px,400px,500px);
+  height: 152px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  /* justify-content: center; */
+  margin: 0 auto;
+}
+
+.edit-div textarea {
+  width: 100%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+}
+
+.edit-div textarea:hover {
+  box-shadow: 2px 2px 10px;
 }
