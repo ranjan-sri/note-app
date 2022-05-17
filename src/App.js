@@ -1,16 +1,18 @@
-import { connect } from 'react-redux';
 
 import './App.css';
 import AddNote from './components/add-note.component.jsx';
 import NoteList from './components/note-list.componenent';
 import Nav  from './components/nav-component';
 import EditNote from './components/edit-note.component'
-function App( {noteToEdit} ) {
-  
+import React, {useContext} from 'react';
+import { NoteContext} from './note.provider';
+
+function App() {
+  const {noteToEdit} = useContext(NoteContext);
   return (
     <div className='app-div'>
       {
-      noteToEdit 
+      Object.keys(noteToEdit).length !==0
       ?
       <>
         <EditNote />
@@ -26,8 +28,6 @@ function App( {noteToEdit} ) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return { noteToEdit: state.noteToEdit }
-}
 
-export default connect(mapStateToProps)(App);
+
+export default App;

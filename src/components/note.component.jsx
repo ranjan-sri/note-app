@@ -1,31 +1,22 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { editNote, deleteNote } from "../actions";
-import deleteLogo from "../assets/delete-img.png";
-import editLogo from "../assets/edit-img.png";
+import React,{useContext} from "react";
+import { NoteContext } from "../note.provider";
+
 
 export const Note = ({ note }) => {
-  const dispatch = useDispatch();
+  const { handleDeleteNote, handleEditNote } = useContext(NoteContext);
 
-  const handleDelete = () => {
-    dispatch(deleteNote(note.id));
-  };
-
-  const handleEdit = () => {
-    dispatch(editNote(note));
-  };
+  
   <a href="https://www.flaticon.com/free-icons/trash" title="trash icons">
-    Trash icons created by Freepik - Flaticon
   </a>;
   return (
     <div className="note-div">
-      <textarea value={note.text} />
+      <p>{note.text} </p>
       <div className="btn-div">
-        <button className="delete-btn" onClick={handleDelete}>
-          <img src={deleteLogo} width="20px" height="20px" alt="" />
+        <button className="delete-btn btn btn-danger" onClick={() => handleDeleteNote(note)}>
+        <i className="bi bi-x"></i>
         </button>
-        <button className="edit-btn" onClick={handleEdit}>
-          <img src={editLogo} width="20px" height="20px" alt="" />
+        <button className="edit-btn btn btn-primary" onClick={() => handleEditNote(note)}>
+        <i className="bi bi-pencil-square"></i>
         </button>
       </div>
     </div>

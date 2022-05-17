@@ -1,23 +1,29 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useContext } from "react";
 
-import { insertNote } from "../actions";
+import { NoteContext} from '../note.provider';
+
 import saveLogo from "../assets/save-img.png";
 const AddNote = () => {
-  const [value, setValue] = useState("");
-  const dispatch = useDispatch();
+  const [value, setValue] = useState('');
+  const[isValueEmpty, setIsValueEmpty] = useState(false);
+   const {handleAddNote} = useContext(NoteContext);
 
   const handleChange = (e) => {
+    setIsValueEmpty(false);
     setValue(e.target.value);
-  };
 
-  const handleAdd = (e) => {
-    value === ""
-      ? alert("Cannot add a blank note")
-      : dispatch(insertNote(value));
-
-    setValue("");
   };
+  
+  const localHandleAddNote = () => {
+    if(value.length === 0) {
+      setIsValueEmpty(true);
+      return;
+    } else {
+      setValue('');
+      handleAddNote(value);
+    }
+  }
+  
 
   return (
     <>
@@ -28,10 +34,13 @@ const AddNote = () => {
           placeholder="Enter note.."
         />
        <div className="btn-div"> 
-        <button className="add-btn" onClick={handleAdd}>
-          <img src={saveLogo} width="20px" height="20px" alt="" />
+        <button className="btn btn-success add-btn" onClick={localHandleAddNote}>
+        <i className="bi bi-save"></i>
         </button>
         </div> 
+       {
+          isValueEmpty ? <div> Note cannot be empty</div> : <></>
+       }
       </div>
     </>
   );

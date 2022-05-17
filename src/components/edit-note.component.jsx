@@ -1,44 +1,45 @@
-import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
-import { saveEditNote, deleteNote } from "../actions";
+import React, { useState, useContext } from "react";
+import { NoteContext } from "../note.provider";
 import saveLogo from "../assets/save-img.png";
 import deleteLogo from "../assets/delete-img.png";
 
-const EditNote = ({ noteToEdit }) => {
+const EditNote = () => {
   // const temp = noteToEdit.text
+  const {noteToEdit, handleDeleteNote,handleUpdateNote } = useContext(NoteContext);
   const [value, setValue] = useState(noteToEdit.text);
-  const dispatch = useDispatch();
+  const[isValueEmpty, setIsValueEmpty] = useState(false);
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    setIsValueEmpty(false);
   };
 
-  const handleSave = (e) => {
-    value === ""
-      ? alert("Cannot add a blank note. Instead, delete the note")
-      : dispatch(saveEditNote({ ...noteToEdit, text: value }));
-  };
-
-  const handleDelete = () => {
-    dispatch(deleteNote(noteToEdit.id));
-  };
+  const localHandleUpdateNote = () => {
+    if(value.length === 0) {
+      setIsValueEmpty(true);
+      return;
+    } else {
+      handleUpdateNote({...noteToEdit, text: value});
+    }
+  }
   return (
-    <div className="edit-div">
+    <div className="add-note-div">
       <textarea value={value} onChange={handleChange} />
       <div className="btn-div">
-        <button className="add-btn" onClick={handleSave}>
-          <img src={saveLogo} width="20px" height="20px" alt="" />
+        <button className="add-btn btn btn-success" onClick={localHandleUpdateNote}>
+        <i className="bi bi-save"></i>
         </button>
-        <button className="delete-btn" onClick={handleDelete}>
-          <img src={deleteLogo} width="20px" height="20px" alt="" />
+        <button className="delete-btn btn btn-danger" onClick={() => handleDeleteNote(noteToEdit)}>
+        <i className="bi bi-x"></i>
         </button>
       </div>
+      {
+          isValueEmpty ? <div> Note cannot be empty. Delete instead</div> : <></>
+       }
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return { noteToEdit: state.noteToEdit };
-};
 
-export default connect(mapStateToProps)(EditNote);
+
+export default EditNote;
